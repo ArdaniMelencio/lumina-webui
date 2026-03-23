@@ -1,0 +1,4 @@
+ollama
+pywebview
+chromadb
+ddgs
