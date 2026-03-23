@@ -1,4 +1,4 @@
 ollama
-pywebview
+pywebview[gtk]
 chromadb
 ddgs

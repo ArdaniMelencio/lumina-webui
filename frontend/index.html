@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>LLM Web UI</title>
+      <link rel="stylesheet" href="styling.css">
+  </head>
+  
+  <body>
+    <header id="app-header">
+        <button class="header-button" id="header-sidepanel-button">=</button>
+        <button class="header-button" id="header-exit-button" onclick="window.pywebview.api.close_app()">x</button>
+    </header>
+    <main>
+        <aside id="sidepanel">
+
+        </aside>
+        <div id="chat-container">
+
+        </div>
+    </main>
+  </body>
+</html>

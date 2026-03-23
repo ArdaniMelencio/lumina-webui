@@ -91,8 +91,8 @@ class AppLauncher:
             
     def _windows_launcher(self):
         content = """@echo off
-REM Auto-generated startup script for Tool-Calling App
-echo Starting Tool-Calling App...
+REM Auto-generated startup script for web ui
+echo Starting App...
 
 REM Check if venv exists
 if not exist "backend\\venv\\Scripts\\python.exe" (
@@ -120,8 +120,8 @@ if errorlevel 1 (
             
     def _unix_launcher(self):
         content = """#!/bin/bash
-# Auto-generated startup script for Tool-Calling App
-echo "Starting Tool-Calling App..."
+# Auto-generated startup script for web ui
+echo "Starting App..."
 
 # Check if venv exists
 if [ ! -f "backend/venv/bin/python" ]; then
