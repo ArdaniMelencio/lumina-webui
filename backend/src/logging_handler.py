@@ -12,11 +12,12 @@ class Logger():
     
     Attributes:
         log_dir (PATH): Location for the log folder
+    
     Methods:
         set_level (level): Sets the log level all the loggers
         log_handler (msg, lvl, hlr): Handles incoming log messages"""
+    
     def __init__(self):
-        self.level = 1
         
         # Log dir
         self.log_dir    = os.path.join(os.path.dirname(__file__), '../../logs')
