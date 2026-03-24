@@ -15,6 +15,7 @@ def main():
     else:
         API_KEY = ''
         print("File not found")
+        print("Create an API KEY at https://ollama.com and write to lumina-webui/API_KEY")
     
     api = ollama_handler.Api_Handler()
 
