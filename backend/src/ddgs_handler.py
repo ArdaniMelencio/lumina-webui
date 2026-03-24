@@ -1,5 +1,6 @@
 from ddgs import DDGS
 
+
 class Search_Handler():
     
     def __init__(self):
@@ -9,6 +10,13 @@ class Search_Handler():
         self.timeout = 20   # Timeout in seconds
         
     def search(self, query: str) -> []:
+        """Search a given query
+        
+        Args:
+            query (str): what to search
+            
+        Returns:
+            [] - Array of search objects"""
         
         # loop to reattempt when search fails
         while True:
