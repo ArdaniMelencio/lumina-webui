@@ -48,7 +48,12 @@ class Logger():
             self.jsLogger.setLevel(logging.WARNING)
         
     def log_handler(self, message, level, handler):
-        """Handles incomming log messages"""
+        """Handles incomming log messages
+        
+        Args:
+            message (str): Log message
+            level (int): Log level
+            handler (handlerType): [python|javascript]"""
         
         if handler == handlerType.PYTHON:
             self._log_python(message, level)
