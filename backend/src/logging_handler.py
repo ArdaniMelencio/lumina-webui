@@ -8,7 +8,13 @@ GRAY = '\033[90m'
 RESET = '\033[0m'
 
 class Logger():
+    """A logging import handler class
     
+    Attributes:
+        log_dir (PATH): Location for the log folder
+    Methods:
+        set_level (level): Sets the log level all the loggers
+        log_handler (msg, lvl, hlr): Handles incoming log messages"""
     def __init__(self):
         self.level = 1
         
