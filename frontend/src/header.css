@@ -24,3 +24,8 @@
     position: absolute;
     right: 5px;
 }
+
+#header-settings-button {
+    position: absolute;
+    right: 35px;
+}
