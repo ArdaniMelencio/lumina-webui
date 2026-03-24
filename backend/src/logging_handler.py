@@ -26,8 +26,6 @@ class Logger():
         self.pyHandler  = logging.handlers.RotatingFileHandler(os.path.join(self.log_dir, 'app.py.log'), maxBytes=10_000_000, backupCount=5)
         self.pyLogger   = logging.getLogger('py.log')
         self.pyLogger.addHandler(self.pyHandler)
-        print(self.pyLogger, self.pyLogger.handlers)
-        print("Hmmm")
         
         # Setup js logger
         self.jsHandler  = logging.handlers.RotatingFileHandler(os.path.join(self.log_dir, 'app.js.log'), maxBytes=10_000_000, backupCount=5)
