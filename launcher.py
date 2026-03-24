@@ -2,10 +2,12 @@
 from pathlib import Path
 import os, sys, subprocess, platform, stat
 
-GUIDE = """Usage: python launcher.py [install|run]
+GUIDE = """Usage: python launcher.py [install|run|test|help]
 
 install - Full setup ( venv -> deps -> launcher )
 run     - Run the application via launcher
+test    - Runs full test of all backend scripts
+help    - Shows this display
 """
 
 def main():
@@ -29,6 +31,11 @@ def main():
             appLauncher._installation()
         case "run":
             print("Attempting to run app...")
+        case "test":
+            print("Testing backend scripts...")
+            appLauncher.tests()
+        case "help":
+            print(GUIDE)
         case _:
             print(f"Unknown command: {command}")
    
@@ -43,6 +50,7 @@ class AppLauncher:
         # Get OS
         self.OS             = platform.system()
         
+        self.python3        = None
         
     def _setup_venv(self):
         """Creates a new virtual environment"""
@@ -167,6 +175,40 @@ fi
         self._setup_venv()
         self._setup_dependencies()
         self._create_launcher()
+        
+    def tests(self):
+        
+        _test_folder = self.backendDir / "tests"
+        
+        test_files = []
+        successful = 0
+        failed = 0
+        
+        self._get_python()
+        
+        for file in os.listdir(_test_folder):
+            if file.endswith('test.py'):
+                test_files.append(_test_folder / file)
+                
+                print(f"\033[32mRunning test: {file}    ---------------------------\033[0m")
+                try:
+                    subprocess.run([self.python3, '-m', f"backend.tests.{file.split('.')[0]}"], check=True)
+                    successful += 1
+                    
+                except Exception as ERR:
+                    print(ERR)
+                    failed += 1
+                print(f"\033[32mFinishing subprocess    ---------------------------\033[0m\n")
+                
+        print("Sucessful:", successful, "\nFailed:\t  ", failed)
+    
+    def _get_python(self):
+        
+        if 'Windows' in self.OS:
+            self.python3 = self.backendDir / "venv" / "Scripts" / "python3"
+        else: 
+            self.python3 = self.backendDir / "venv" / "bin" / "python3"
+
         
             
 if __name__=="__main__":
