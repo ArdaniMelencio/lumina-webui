@@ -1,22 +1,35 @@
-import webview, json, time, pathlib, datetime
+import webview, json, time, pathlib, datetime, sys
+import logging_handler
 
 class Api:
     
     def __init__(self):
         self.window = None
         self.model  = 'deepseek-v3.1:671b-cloud'
+        self.logger = logging_handler.Logger()
         
         
-    def _set_window(self, window):
+    def _set_window(self, window, level):
         self.window = window
+        self.logger.set_level(level)
+        self.logger.log_handler(f"Starting application at {window}", 10, logging_handler.handlerType.PYTHON)
+        
+        
+    def log(self, log):
+        """Prints {log} from script, src dictates which language it is from"""
+        
+        self.logger.log_handler(f"{log}", 20, logging_handler.handlerType.JS)
         
         
     def close_app(self):
         import sys
         if webview.windows:
+            self.logger.log_handler(f"Closing application at {self.window}", 10, logging_handler.handlerType.PYTHON)
             webview.windows[0].destroy()
         sys.exit(0)
- 
+        
+    
+    
 def launch_webview(use_debug: bool = False):
     """Launches pywebview with/out debugging"""
     
@@ -33,11 +46,23 @@ def launch_webview(use_debug: bool = False):
         min_size=(420, 420)
     )
     
-    api._set_window(window=window)
-    webview.start(debug=use_debug, gui='gtk')
+    if use_debug: level = 10
+    else: level = 30
     
+    api._set_window(window=window, level = level)
+    webview.start(debug=use_debug, gui='gtk')
     
         
 if __name__ == "__main__":
     
-    launch_webview(True)
+    # Add explanation later
+    try:
+        command = sys.argv[1]
+    except:
+        command = ''
+        
+    match (command):
+        case '--debug':
+            launch_webview(True)
+        case _:
+            launch_webview(False)
