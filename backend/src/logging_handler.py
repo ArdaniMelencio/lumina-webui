@@ -58,6 +58,10 @@ class Logger():
             self._log_python(message, level)
         elif handler == handlerType.JS:
             self._log_js(message, level)
+        elif handler == handlerType.TEST:
+            print(f"Received test message: {message} ")
+            print(f"|--Level   - {level}")
+            print(f"---Handler - {handler}")
         
     
     
@@ -97,3 +101,4 @@ class Logger():
 class handlerType(str, Enum):
     PYTHON  = 'python'
     JS      = 'javascript'
+    TEST    = 'test'
