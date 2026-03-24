@@ -2,3 +2,4 @@ ollama
 pywebview[gtk]
 chromadb
 ddgs
+transformers
