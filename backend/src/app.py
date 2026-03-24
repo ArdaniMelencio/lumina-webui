@@ -9,11 +9,23 @@ class Api:
         self.logger = logging_handler.Logger()
         
         
-    def _set_window(self, window, level):
+    def _set_window(self, window: webview.create_window()):
+        """Sets current window
+        
+        Args: 
+            window (webview.createwindow): Main window for application"""
+        
         self.window = window
-        self.logger.set_level(level)
         self.logger.log_handler(f"Starting application at {window}", 10, logging_handler.handlerType.PYTHON)
         
+    
+    def _set_log_level(self, level):
+        """Set logging level depending on argv
+        
+        Args:
+            level(int): [10|30]"""
+        
+        self.logger.set_level(level)
         
     def log(self, log):
         """Prints {log} from script, src dictates which language it is from"""
@@ -49,7 +61,9 @@ def launch_webview(use_debug: bool = False):
     if use_debug: level = 10
     else: level = 30
     
-    api._set_window(window=window, level = level)
+    api._set_log_level(level=level)
+    api._set_window(window=window)
+    
     webview.start(debug=use_debug, gui='gtk')
     
         
