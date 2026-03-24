@@ -23,7 +23,7 @@ def main():
     api.init(model, API_KEY)
     
     print("\n\nAttempting online message")
-    #attemptMessage(api, model, ollama_handler.utilClient.online)
+    if API_KEY != '': attemptMessage(api, model, ollama_handler.utilClient.online)
     
     print("\n\nAttempting local message")
     attemptMessage(api, local_model, ollama_handler.utilClient.local)
