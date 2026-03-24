@@ -4,16 +4,14 @@ def main():
     local_model = 'gemma3:270m'
 
     print("Importing ollama_handler.py...")
-    
     from backend.src import ollama_handler
     from pathlib import Path
 
     print("Trying to open API_KEY file")
-    
     if Path('API_KEY').exists():
         with open('API_KEY' , 'r') as file:
             API_KEY = file.read()
-            print(f"Opened succesfully: {API_KEY}")
+            print(f"Opened succesfully: {API_KEY[0:5]}...")
     else:
         API_KEY = ''
         print("File not found")
