@@ -24,6 +24,15 @@ def main():
     except Exception as r:
         print(r)
         command = "None"
+        
+    selection = ''
+        
+    if command == "test":
+        try:
+            selection = sys.argv[2]
+        except Exception as r:
+            print(r)
+
     
     match(command):
         case "install":
@@ -32,6 +41,14 @@ def main():
         case "run":
             print("Attempting to run app...")
         case "test":
+            if selection != '':
+                match (selection):
+                    case 'help':
+                        appLauncher.available_tests()
+                        return
+                    case _:
+                        appLauncher.test_single(selection)
+                        return
             print("Testing backend scripts...")
             appLauncher.tests()
         case "help":
@@ -176,6 +193,18 @@ fi
         self._setup_dependencies()
         self._create_launcher()
         
+        
+    def test_single(self, name):
+        
+        self._get_python()
+        
+        try:
+            print(f"\033[32mRunning test: {name}\033[0m")
+            subprocess.run([self.python3, '-m', f"backend.tests.{name}_test"], check=True)
+        except Exception as ERR:
+            print(ERR)
+        
+        
     def tests(self):
         
         _test_folder = self.backendDir / "tests"
@@ -209,6 +238,16 @@ fi
         else: 
             self.python3 = self.backendDir / "venv" / "bin" / "python3"
 
+    
+    def available_tests(self):
+        
+        _test_folder = self.backendDir / "tests"
+        
+        print("Available tests:")
+        
+        for file in os.listdir(_test_folder):
+            if file.endswith('test.py'):
+                print(f"\t{file.split('_')[0]} - {file}")
         
             
 if __name__=="__main__":
