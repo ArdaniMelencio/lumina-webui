@@ -21,3 +21,4 @@ class Search_Handler():
                 )
             except Exception as ERR:
                 print(ERR)
+                
