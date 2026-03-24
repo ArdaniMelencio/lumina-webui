@@ -35,7 +35,10 @@ class Logger():
         
         
     def set_level(self, level):
-        """Set logging level"""
+        """Set logging level
+        
+        Args:
+            level (int): [10|30]"""
         
         if level == 10:
             self.pyLogger.setLevel(logging.DEBUG)
