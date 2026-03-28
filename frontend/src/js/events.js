@@ -1,5 +1,4 @@
 
-
 function __init_events(e){
 
     resize_input();
@@ -17,6 +16,12 @@ function __init_events(e){
     })
 
     SETTINGS_BTN.addEventListener('click', async function(event) {SETTINGS.classList.toggle('toggle'); console.log("Toggled")});
+
+    SETTINGS.querySelectorAll('button[data-panel]').forEach(button => {
+        button.addEventListener('click', function(event){
+            changeSettingsDisplay(button)
+        });
+    });
 
     document.addEventListener('keydown', async function(event) {
 
@@ -38,3 +43,4 @@ function __init_events(e){
     })
 
 };
+
