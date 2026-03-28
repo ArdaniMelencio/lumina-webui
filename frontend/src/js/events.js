@@ -17,3 +17,15 @@ function __init_events(e){
     })
 
     SETTINGS_BTN.addEventListener('click', async function(event) {SETTINGS.classList.toggle('toggle'); console.log("Toggled")});
+
+    document.addEventListener('keydown', async function(event) {
+
+
+        if (event.key == 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            handleUserInput(INPUT_TEXT.value);
+        }
+
+    })
+
+};
