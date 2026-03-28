@@ -14,6 +14,21 @@ html {
     margin: 0;
     padding: 0;
     
+/* GUIDELINE */
+    /* LAYOUT & POSITIONING */
+  
+    /* DISPLAY & FLEXBOX/GRID */
+    /* SIZING */
+    /* SPACING */
+    /* TYPOGRAPHY */
+    /* BACKGROUND & BORDERS */
+    /* EFFECTS */
+    /* OTHER */
+/* END OF GUIDELINE */
+
+
+
+    /* TYPOGRAPHY */
     font-family: 'Fira Code', monospace;
     --main-color: rgb(32, 57, 61);
 }
