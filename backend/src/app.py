@@ -27,10 +27,11 @@ class Api:
         
         self.logger.set_level(level)
         
-    def log(self, log):
+    def log(self, log, logLevel):
         """Prints {log} from script, src dictates which language it is from"""
         
-        self.logger.log_handler(f"{log}", 20, logging_handler.handlerType.JS)
+        print(f"[{logLevel}] FROM JS: {log}")
+        self.logger.log_handler(f"{log}", logLevel, logging_handler.handlerType.JS)
         
         
     def close_app(self):
