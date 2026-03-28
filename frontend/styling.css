@@ -28,16 +28,21 @@ html {
 
 
 
+* {
     /* TYPOGRAPHY */
     font-family: 'Fira Code', monospace;
-    --main-color: rgb(32, 57, 61);
-}
 
-body {
+
+    /* SPACING */
     margin: 0px;
     padding: 0px;
 
-    font-family: 'Fira Code', monospace;
+    /* TYPOGRAPHY */
+    color: var(--text-colors);
+
+
+    /* BACKGROUND & BORDERS */
+    border-radius: 5px;
 }
 
 button {
