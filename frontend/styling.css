@@ -1,5 +1,9 @@
 @import url('src/header.css');
 @import url('src/chat-container.css');
+@import url('src/css/icons.css');
+@import url('src/css/header.css');
+@import url('src/css/chat-container.css');
+@import url('src/css/settings.css');
 
 html {
     overflow: hidden;
@@ -48,3 +52,5 @@ main {
     align-items: center;
     flex-direction: column;
 }
+
+\ No newline at end of file
