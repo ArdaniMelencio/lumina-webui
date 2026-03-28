@@ -9,3 +9,9 @@ function __init_events(e){
 
         resize_input();
     });
+
+    INPUT_FORM.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        handleUserInput(INPUT_TEXT.value);
+    })
