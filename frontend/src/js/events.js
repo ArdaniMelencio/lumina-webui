@@ -20,6 +20,10 @@ function __init_events(e){
 
     document.addEventListener('keydown', async function(event) {
 
+        if (event.key == 'Escape') {
+            INPUT_TEXT.blur();    
+            document.getElementById('chat-container').focus();
+        }
 
         if (event.key == 'Enter' && !event.shiftKey) {
             event.preventDefault();
