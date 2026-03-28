@@ -4,3 +4,8 @@ function resize_input(){
     INPUT_TEXT.style.height = '30px';
     INPUT_TEXT.style.height = `${INPUT_TEXT.scrollHeight + 2}px` ;
 }
+
+function scroll_down(){
+    // Moves scroll box down to lowest
+    CHATBOX.scrollTop = CHATBOX.scrollHeight;
+}
