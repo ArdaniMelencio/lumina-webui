@@ -15,3 +15,5 @@ function __init_events(e){
 
         handleUserInput(INPUT_TEXT.value);
     })
+
+    SETTINGS_BTN.addEventListener('click', async function(event) {SETTINGS.classList.toggle('toggle'); console.log("Toggled")});
