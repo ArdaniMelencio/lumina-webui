@@ -1,4 +1,4 @@
-import webview, json, time, pathlib, datetime, sys
+import webview, json, time, pathlib, datetime, sys, os
 import logging_handler
 
 class Api:
@@ -45,6 +45,8 @@ class Api:
 def launch_webview(use_debug: bool = False):
     """Launches pywebview with/out debugging"""
     
+    # temporary
+    os.environ['LIBGL_ALWAYS_SOFTWARE'] = '0'
     
     print(pathlib.Path.cwd() / "frontend")
     
