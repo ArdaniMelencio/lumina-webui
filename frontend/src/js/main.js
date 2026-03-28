@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', async function(e) {
     __init_events();
 })
 
+window.addEventListener('pywebviewready', async function(e) {
+
+    Settings.init();
+    setSettings();
+    
+});
 
 function handleUserInput(message) {
 
