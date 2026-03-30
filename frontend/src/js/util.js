@@ -52,8 +52,6 @@ const Settings = {
     this.current = saved ? JSON.parse(saved) : { ...this.defaults };
     this.applyAll();
 
-    console.log(JSON.parse(saved), saved);
-
     pywebview.api.log("Settings.init(): " + storage, 10);
   },
   
@@ -106,19 +104,33 @@ const Settings = {
   },
 
   setValues() {
-    const settings = SETTINGS.querySelectorAll('[data-settings');
+    const settings = SETTINGS.querySelectorAll('[data-settings]');
+    pywebview.api.log("Starting to set form field values from settings", 10);
 
     settings.forEach(value => {
+      try {
+        const settingName = value.dataset.settings;
+        const settingValue = Settings.get(settingName);
+            
+        // Mask API key value in logs for security
+        const logValue = settingName === 'api_key' ? '***' : settingValue;
+        pywebview.api.log(`Setting ${settingName} to ${logValue}`, 20);
 
         if (value.type == 'checkbox') {
-          console.log(value.checked);
-          value.checked = Settings.get(value.dataset.settings);
+          value.checked = settingValue;
           value.dispatchEvent(new Event('change', { bubbles: true }));
+          pywebview.api.log(`Checkbox ${settingName} set to ${settingValue}`, 10);
+        } else {
+          value.value = settingValue;
+          pywebview.api.log(`Input ${settingName} set to ${logValue}`, 10);
         }
-        else value.value = Settings.get(value.dataset.settings);
-
+      } catch (error) {
+        pywebview.api.log(`Error setting value for ${value.dataset.settings}: ${error}`, 40);
+      }
     });
-  }
+
+    pywebview.api.log("Finished setting all form field values", 10);
+}
 };
 
 function setSettings(){
@@ -156,7 +168,6 @@ function saveSettings() {
         settings.forEach(value => {
             
         if (value.type == 'checkbox') {
-          console.log(value.checked);
           Settings.set(value.dataset.settings, value.checked);
         }
         else Settings.set(value.dataset.settings, value.value); 

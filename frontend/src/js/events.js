@@ -1,9 +1,9 @@
-
 function __init_events(e){
     // Initialize input textarea sizing on page load
     resize_input();
+    pywebview.api.log("Input textarea initialized", 10);
 
-    // Auto-resize textarea as user types (expands until max height, then CSS handles overflow)
+    // Auto-resize textarea as user types
     INPUT_TEXT.addEventListener('input', async function(event) {
         event.preventDefault();
         resize_input();
@@ -12,31 +12,32 @@ function __init_events(e){
     // Handle chat message submission
     INPUT_FORM.addEventListener('submit', async function(event) {
         event.preventDefault();
+        pywebview.api.log("Message submission triggered", 10);
         handleUserInput(INPUT_TEXT.value);
     });
 
-
-
     // Toggle settings panel visibility
     SETTINGS_BTN.addEventListener('click', async function(event) {
-        SETTINGS.classList.toggle('toggle'); 
-        console.log("Toggled");
+        SETTINGS.classList.toggle('toggle');
+        const isVisible = SETTINGS.classList.contains('toggle');
+        pywebview.api.log(`Settings panel ${isVisible ? 'opened' : 'closed'}`, 10);
     });
 
-    // Settings panel navigation - switch between different settings sections
+    // Settings panel navigation
     SETTINGS.querySelectorAll('button[data-panel]').forEach(button => {
         button.addEventListener('click', function(event) {
-            changeSettingsDisplay(button); // Switches to panel specified by data-panel attribute (General/Themes/Advanced)
+            changeSettingsDisplay(button);
+            pywebview.api.log(`Switched to ${button.dataset.panel} settings panel`, 10);
         });
     });
 
-    // Local mode toggle - disable API key input when using local models
+    // Local mode toggle
     document.getElementById("checkbox-local").addEventListener('change', function(e) {
         const localToggle = document.getElementById("checkbox-local");
         const api = document.getElementById('api-key-input');
         
-        // API key input disabled for local mode, enabled for online mode
         api.disabled = localToggle.checked;
+        pywebview.api.log(`Local mode ${localToggle.checked ? 'enabled' : 'disabled'}`, 10);
     });
 
     // Global keyboard shortcuts
@@ -45,19 +46,23 @@ function __init_events(e){
         if (event.key == '/' && !INPUT_TEXT.matches(':focus')) {
             event.preventDefault();
             INPUT_TEXT.focus();
+            pywebview.api.log("Input focused with '/' key", 20);
         }
         
         // Escape key clears input focus
         if (event.key == 'Escape') {
             INPUT_TEXT.blur();    
             document.getElementById('chat-container').focus();
+            pywebview.api.log("Input focus cleared with Escape key", 20);
         }
 
         // Submit message with Enter (Shift+Enter for new line)
         if (event.key == 'Enter' && !event.shiftKey) {
             event.preventDefault();
+            pywebview.api.log("Message submitted with Enter key", 10);
             handleUserInput(INPUT_TEXT.value);
         }
     });
+    
+    pywebview.api.log("All event listeners initialized successfully", 10);
 };
-
