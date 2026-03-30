@@ -26,7 +26,7 @@ class Api_Handler():
         
         if api_key != None:
             self.api_key = api_key
-        
+            print(api_key)
         
         #self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
             
@@ -38,7 +38,7 @@ class Api_Handler():
         
         self.local_client = ollama.Client()
         
-        if self.api_key != '':
+        if self.api_key != '' or self.api_key != '000':
             self.api_client = ollama.Client(
                 host = "https://ollama.com",
                 headers = {'Authorization': 'Bearer ' + self.api_key}
@@ -48,7 +48,7 @@ class Api_Handler():
     def sendMessage(self, message, client: utilClient) -> stream:
         """Send a query to the selected client"""
         
-        self._addToMessages(message)
+        self.addToMessages('user', message)
         #self.total_tokens = self._tokenize(message)
         
         
@@ -56,17 +56,17 @@ class Api_Handler():
         cli = self.checkUtil(client)
         self.current_tokens = 0
         
-        return cli.chat(
+        return client.chat(
             model = self.model,
             messages = self.messages,
             stream = True
         )
             
         
-    def _addToMessages(self, message):
+    def addToMessages(self, role, message):
         
         self.messages.append({
-            'role' : 'user',
+            'role' : role,
             'content':message
         })
     

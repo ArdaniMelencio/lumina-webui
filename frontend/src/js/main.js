@@ -15,12 +15,7 @@ function handleUserInput(message) {
 
     INPUT_BTN.classList.add('send');
 
-    if (INPUT_TEXT.value == '') {
-        setTimeout(() => {
-            INPUT_BTN.classList.remove('send');
-        }, 100);
-        return;
-    }
+    if (INPUT_TEXT.value == '') { setTimeout(() => { INPUT_BTN.classList.remove('send'); }, 100); return; }
 
     if (!CHATBOX.classList.contains('hasMessage')) {
         CHATBOX.classList.add('hasMessage');
@@ -29,6 +24,8 @@ function handleUserInput(message) {
 
     message_handler('user', message);
     resize_input();
+
+    message_handler('bot', message);
 
     setTimeout(() => {
         INPUT_BTN.classList.remove('send');
@@ -52,16 +49,18 @@ function message_handler(sender, message)  {
     }
 }
 
-function bot(msgDiv, message) {
+async  function bot(msgDiv, message) {
 
-    pywebview.api.log("Submitted by bot: " + message, 10);
+    //pywebview.api.log("Submitted by bot: " + message, 10);
 
-    msgDiv.textContent = message;
+    msgDiv.textContent = 'Processing...';
     msgDiv.classList.add('message', 'bot')
     
     CHATBOX.appendChild(msgDiv)
     INPUT_TEXT.value = '';
     
+    await pywebview.api.send(message);
+
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
