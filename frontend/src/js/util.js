@@ -23,3 +23,73 @@ function changeSettingsDisplay(button){
     })
     template.style.display = 'block';
 }
+
+const Settings = {
+    defaults: {
+        primaryColor: '#0C0F11',
+        fontColor: '#adadad',
+        use_local: false,
+        model: 'deepseek-v3.1:671b-cloud',
+        api_key: '000'
+    },
+
+    getStorage() {
+    try {
+      // Try localStorage first
+      localStorage.getItem('appSettings');
+      return localStorage;
+    } catch (e) {
+      // Fallback to sessionStorage
+      localStorage.setItem('appSettings');
+      return localStorage;
+    }
+  },
+
+  init() {
+    const storage = this.getStorage();
+    const saved = storage.getItem('appSettings');
+
+
+    this.current = saved ? JSON.parse(saved) : { ...this.defaults };
+    this.applyAll();
+
+    console.log(JSON.parse(saved), saved);
+
+    pywebview.api.log("Settings.init(): " + storage, 10);
+  },
+  
+  get(key) {
+    return this.current[key] ?? this.defaults[key]; // Auto-fallback
+  },
+  
+  set(key, value) {
+    this.current[key] = value;
+    localStorage.setItem('appSettings', JSON.stringify(this.current));
+    this.apply(key, value);
+  },
+  
+  apply(key, value) {
+    const actualValue = value ?? this.defaults[key];
+    const root = document.documentElement;
+
+    switch(key) {
+      case 'primaryColor':
+        root.style.setProperty('--message-box', actualValue);
+        break;
+    }
+  },
+
+  saveStorage() {
+    pywebview.api.log(`Saving ${this.current.toString()}`, 10);
+    console.log(this.current);
+    localStorage.setItem('appSettings', JSON.stringify(this.current));
+
+    console.log(localStorage.getItem('appSettings'));
+  },
+  
+  applyAll() {
+    Object.keys(this.defaults).forEach(key => {
+      this.apply(key, this.get(key));
+    });
+  }
+};
