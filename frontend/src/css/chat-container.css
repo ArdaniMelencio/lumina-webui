@@ -102,6 +102,22 @@
     user-select: text;
 }
 
+.message:hover {
+    background: linear-gradient(127deg, hsl(from var(--message-box) h s calc(l + 0.7)), hsl(from var(--message-box) h s calc(l + 5)));
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.bot {
+    /* DISPLAY & FLEXBOX/GRID */
+    align-self: flex-start;
+  
+  
+    /* BACKGROUND & BORDERS */
+    background-color: transparent;
+    border-top-left-radius: 2px;
+}
+
 .user {
     /* DISPLAY & FLEXBOX/GRID */
     align-self: flex-end;
@@ -109,7 +125,7 @@
   
     /* BACKGROUND & BORDERS */
     background-color: transparent;
-    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 #user-entry {
@@ -126,7 +142,7 @@
 
   
     background-color: hsla( from var(--message-box) h s calc(l - 2) / 75%); 
-    border: solid 1px var(--outline);
+    border: solid 1px var(--text-colors);
     border-radius: 20px;
     
     /* SIZING */
@@ -137,6 +153,19 @@
     /* SPACING */
     margin-bottom: 10px;
     padding: 5px;
+    
+    /* EFFECTS */
+    transition: all 0.1s;
+}
+
+#user-entry:hover:not(:has(#form-submit:hover)){
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
+}
+
+#user-entry:has(#form-input:focus) {
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }
 
 #form-input {
@@ -178,6 +207,16 @@
     
     /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 2) / 75%); 
-    border: solid 1px var(--outline);
+    border: solid 1px var(--text-colors);
     border-radius: 15px;
+}
+
+#form-submit:hover {
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
+}
+
+#form-submit.send {
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }
