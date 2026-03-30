@@ -93,3 +93,18 @@ const Settings = {
     });
   }
 };
+
+function setSettings(){
+    pywebview.api.model = Settings.get('model');
+    pywebview.api.api_key = Settings.get('api_key');
+    pywebview.api.use_local = Settings.get('use_local');
+
+    const settings = SETTINGS.querySelectorAll('[data-settings');
+
+    settings.forEach(value => {
+        value.value = Settings.get(value.dataset.settings);
+    });
+    document.getElementById('primary-color-picker').value = Settings.get('primaryColor');
+}
+
+}
