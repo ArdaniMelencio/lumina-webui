@@ -5,16 +5,25 @@ class Api:
     
     def __init__(self):
         self.window = None
-        self.use_local = False
-        self.model  = None
-        self.api_key = None
         self.logger = logging_handler.Logger()
         self.ollama = ollama_handler.Api_Handler()
+        self.logger = logging_handler.Logger()
+        self.settings = {
+            'model': 'deepseek-v3.1:671b-cloud',
+            'api_key': '000', 
+            'use_local': False
+        }
         
     def setModel(self, model, api):
         self.model, self.api_key = model, api
         
         self.ollama.init(self.model, self.api_key)
+        
+    def update_settings(self, new_settings):
+        """Update multiple settings at once from frontend"""
+        self.settings.update(new_settings)
+        self.log(f"Settings updated: {new_settings}", 10)
+    
         
     def _set_window(self, window: webview.create_window()):
         """Sets current window
