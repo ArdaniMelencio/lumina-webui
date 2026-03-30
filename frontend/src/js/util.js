@@ -18,6 +18,7 @@ function changeSettingsDisplay(button){
 
     const display =  document.getElementById('settings-display');
     const panels = display.querySelectorAll('[class="display"]');
+    
     panels.forEach(panel => {
         panel.style.display = 'none';
     })
@@ -104,7 +105,24 @@ function setSettings(){
     settings.forEach(value => {
         value.value = Settings.get(value.dataset.settings);
     });
+    
     document.getElementById('primary-color-picker').value = Settings.get('primaryColor');
+
+    
 }
 
+function saveSettings(){
+
+    const settings = SETTINGS.querySelectorAll('[data-settings');
+
+    settings.forEach(value => {
+        Settings.set(value.dataset.settings, value.value);
+    });
+
+    Settings.saveStorage();
+}
+
+function startClose(){
+    saveSettings();
+    pywebview.api.close_app();
 }
