@@ -21,7 +21,7 @@
 
 .icon:active {
 
-    padding: 8px;
+    padding: 11px;
     background: hsl(from var(--text-colors) h s calc(l - 3));
 
 }

@@ -1,30 +1,29 @@
-
-function resize_input(){
-    // Resize text input based on entry
+// Textarea utility functions
+function resize_input() {
+    // Reset and expand textarea height based on content
     INPUT_TEXT.style.height = '30px';
-    INPUT_TEXT.style.height = `${INPUT_TEXT.scrollHeight + 2}px` ;
+    INPUT_TEXT.style.height = `${INPUT_TEXT.scrollHeight + 2}px`;
 }
 
-
-function scroll_down(){
-    // Moves scroll box down to lowest
+function scroll_down() {
+    // Scroll chat container to bottom to show latest messages
     CHATBOX.scrollTop = CHATBOX.scrollHeight;
 }
 
-function changeSettingsDisplay(button){
+// Settings panel navigation
+function changeSettingsDisplay(button) {
     const panelName = button.dataset.panel;
     const templateId = `${panelName}-panel`;
     const template = document.getElementById(templateId);
-
-    const display =  document.getElementById('settings-display');
+    const display = document.getElementById('settings-display');
     const panels = display.querySelectorAll('[class="display"]');
     
-    panels.forEach(panel => {
-        panel.style.display = 'none';
-    })
+    // Hide all panels, then show the selected one
+    panels.forEach(panel => panel.style.display = 'none');
     template.style.display = 'block';
 }
 
+// Settings management object
 const Settings = {
     defaults: {
         primaryColor: '#0C0F11',
@@ -36,11 +35,10 @@ const Settings = {
 
     getStorage() {
     try {
-      // Try localStorage first
+      // Try localStorage first, if none, create new settings
       localStorage.getItem('appSettings');
       return localStorage;
     } catch (e) {
-      // Fallback to sessionStorage
       localStorage.setItem('appSettings');
       return localStorage;
     }
@@ -54,13 +52,11 @@ const Settings = {
     this.current = saved ? JSON.parse(saved) : { ...this.defaults };
     this.applyAll();
 
-    console.log(JSON.parse(saved), saved);
-
     pywebview.api.log("Settings.init(): " + storage, 10);
   },
   
   get(key) {
-    return this.current[key] ?? this.defaults[key]; // Auto-fallback
+    return this.current[key] ?? this.defaults[key]; // Auto-fallback to defaults
   },
   
   set(key, value) {
@@ -71,12 +67,13 @@ const Settings = {
   
   apply(key, value) {
     const actualValue = value ?? this.defaults[key];
-    const root = document.documentElement;
-
+    const root = document.documentElement
+    
     switch(key) {
       case 'primaryColor':
         root.style.setProperty('--message-box', actualValue);
         break;
+      // Add more CSS variable mappings as needed
       case 'use_local':
         pywebview.api.use_local = actualValue;
         break;
@@ -84,17 +81,21 @@ const Settings = {
   },
 
   saveStorage() {
-    pywebview.api.log(`Saving ${this.current.toString()}`, 10);
-    console.log(this.current);
-    localStorage.setItem('appSettings', JSON.stringify(this.current));
-
-    console.log(localStorage.getItem('appSettings'));
+    try {
+      pywebview.api.log(`Saving settings: ${JSON.stringify(this.current)}`, 10);
+      localStorage.setItem('appSettings', JSON.stringify(this.current));
+      pywebview.api.log("Settings saved successfully", 10);
+    } catch (e) {
+      pywebview.api.log("Failed to save settings to storage", 40);
+    }
   },
   
   applyAll() {
+    // Apply all current settings to the UI
     Object.keys(this.defaults).forEach(key => {
-      this.apply(key, this.get(key));
+        this.apply(key, this.get(key));
     });
+    pywebview.api.log("All settings applied to UI", 10);
   },
 
   reset() {
@@ -103,52 +104,88 @@ const Settings = {
   },
 
   setValues() {
-    const settings = SETTINGS.querySelectorAll('[data-settings');
+    const settings = SETTINGS.querySelectorAll('[data-settings]');
+    pywebview.api.log("Starting to set form field values from settings", 10);
 
     settings.forEach(value => {
+      try {
+        const settingName = value.dataset.settings;
+        const settingValue = Settings.get(settingName);
+            
+        // Mask API key value in logs for security
+        const logValue = settingName === 'api_key' ? '***' : settingValue;
+        pywebview.api.log(`Setting ${settingName} to ${logValue}`, 20);
 
         if (value.type == 'checkbox') {
-          console.log(value.checked);
-          value.checked = Settings.get(value.dataset.settings);
+          value.checked = settingValue;
           value.dispatchEvent(new Event('change', { bubbles: true }));
+          pywebview.api.log(`Checkbox ${settingName} set to ${settingValue}`, 10);
+        } else {
+          value.value = settingValue;
+          pywebview.api.log(`Input ${settingName} set to ${logValue}`, 10);
         }
-        else value.value = Settings.get(value.dataset.settings);
-
+      } catch (error) {
+        pywebview.api.log(`Error setting value for ${value.dataset.settings}: ${error}`, 40);
+      }
     });
-  }
+
+    pywebview.api.log("Finished setting all form field values", 10);
+}
 };
 
 function setSettings(){
-    pywebview.api.model = Settings.get('model');
-    pywebview.api.api_key = Settings.get('api_key');
-    pywebview.api.use_local = Settings.get('use_local');
-    pywebview.api.system_message = Settings.get('system-message');
-
-    pywebview.api.setModel(Settings.get('model'), Settings.get('api_key'));
-
-    Settings.setValues();
-    
+  try {
+    // Send all settings as a single object
+    const settingsData = {
+      model: Settings.get('model'),
+      api_key: Settings.get('api_key'), 
+      use_local: Settings.get('use_local'),
+      system_message: Settings.get('system-message')
+    };
+        
+    pywebview.api.update_settings(settingsData);
+    pywebview.api.log("All settings synchronized with backend", 10);
+      
+    // Populate settings form fields with current values
+    const settings = SETTINGS.querySelectorAll('[data-settings]');
+    settings.forEach(value => {
+      value.value = Settings.get(value.dataset.settings);
+    });
+        
     document.getElementById('primary-color-picker').value = Settings.get('primaryColor');
-
+    Settings.setValues();
+    pywebview.api.log("Settings form populated", 10);
     
+    } catch (e) {
+        pywebview.api.log("Error syncing settings with backend", 40);
+    }
 }
 
-function saveSettings(){
-
-    const settings = SETTINGS.querySelectorAll('[data-settings');
-
-    settings.forEach(value => {
-        
+function saveSettings() {
+    try {
+        // Save all settings from form fields to storage
+        const settings = SETTINGS.querySelectorAll('[data-settings]');
+        settings.forEach(value => {
+            
         if (value.type == 'checkbox') {
-          console.log(value.checked);
           Settings.set(value.dataset.settings, value.checked);
         }
         else Settings.set(value.dataset.settings, value.value); 
-    });
-
-    Settings.saveStorage();
+        });
+        Settings.saveStorage();
+        pywebview.api.log("All settings saved from form", 10);
+    } catch (e) {
+        pywebview.api.log("Failed to save settings from form", 40);
+    }
 }
 
-function startClose(){
-    pywebview.api.close_app();
+function startClose() {
+    try {
+        // Save settings and close application
+        saveSettings();
+        pywebview.api.log("Application closing initiated", 10);
+        pywebview.api.close_app();
+    } catch (e) {
+        pywebview.api.log("Error during application close", 50);
+    }
 }
