@@ -23,6 +23,14 @@ function __init_events(e){
         });
     });
 
+    document.getElementById("checkbox-local").addEventListener('change', function(e) {
+  
+        const localToggle = document.getElementById("checkbox-local");
+        const api = document.getElementById('api-key-input');
+
+        api.disabled = localToggle.checked;
+    })
+
     document.addEventListener('keydown', async function(event) {
 
         if (event.key == '/' && !INPUT_TEXT.matches(':focus')) {
