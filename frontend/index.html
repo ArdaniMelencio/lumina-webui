@@ -13,7 +13,7 @@
         <button class="header-button" id="header-sidepanel-button">
             <span class="icon sidebar"></span>
         </button>
-        <button class="header-button" id="header-exit-button" onclick="window.pywebview.api.close_app()">
+        <button class="header-button" id="header-exit-button" onclick="startClose()">
             <img class="icon exit">
         </button>
         <button class="header-button" id="header-settings-button">
@@ -72,11 +72,16 @@
                     
                         <div id="Advanced-panel" class="display">
                             <h2>Advanced Settings</h2>
+                            <form class="settings-selection">
+                                <div class="settings-label">System Message:</div>
+                                <textarea id="system-message" data-settings="system-message" placeholder="Enter your system message here"></textarea>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div id="settings-save-panel">
-                    
+                    <button id="save-changes" onclick="saveSettings()">save</button>
+                    <button id="reset-changes" onclick="Settings.reset()">reset</button>
                 </div>
             </div>
         </div>
