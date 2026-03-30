@@ -16,6 +16,14 @@
 
 .icon:hover {
     padding: 12px;
+    background: hsl(from var(--text-colors) h s calc(l + 2));
+}
+
+.icon:active {
+
+    padding: 8px;
+    background: hsl(from var(--text-colors) h s calc(l - 3));
+
 }
 
 .icon.sidebar {
