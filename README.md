@@ -1,7 +1,7 @@
 # Lumina - AI Chat Interface
 A lightweight, customizable chat interface
 
-## Features
+## ✨ Features
 
 - LLM Chatting
     - Local - chat with local models via ollama local clients 
@@ -14,7 +14,7 @@ A lightweight, customizable chat interface
     - RAG functionality
     - Web searching
 
-## Installation
+## 🚀 Installation
 
 ```bash
 # Clone this repo
@@ -42,7 +42,7 @@ ollama pull <your-model-here>
 ```
 
 
-## Usage
+## 🎯 Usage
 
 Running via python (Easier multiplatform support)
 
