@@ -1,13 +1,20 @@
 import webview, json, time, pathlib, datetime, sys, os
-import logging_handler
+import logging_handler, ollama_handler
 
 class Api:
     
     def __init__(self):
         self.window = None
-        self.model  = 'deepseek-v3.1:671b-cloud'
+        self.use_local = False
+        self.model  = None
+        self.api_key = None
         self.logger = logging_handler.Logger()
+        self.ollama = ollama_handler.Api_Handler()
         
+    def setModel(self, model, api):
+        self.model, self.api_key = model, api
+        
+        self.ollama.init(self.model, self.api_key)
         
     def _set_window(self, window: webview.create_window()):
         """Sets current window
@@ -32,6 +39,27 @@ class Api:
         
         print(f"[{logLevel}] FROM JS: {log}")
         self.logger.log_handler(f"{log}", logLevel, logging_handler.handlerType.JS)
+        
+        
+    def send(self, message):
+        """Send query to api client"""
+        
+        reply = ''
+        
+        if self.use_local:
+            chunks = self.ollama.sendMessage(message, self.ollama.local_client)
+            
+            for chunk in chunks:
+                print(chunk['message']['content'], flush=True, end='')
+                reply += chunk['message']['content']
+        else:
+            chunks = self.ollama.sendMessage(message, self.ollama.api_client)
+            
+            for chunk in chunks:
+                print(chunk['message']['content'], flush=True, end='')
+                reply += chunk['message']['content']
+            
+        self.ollama.addToMessages('assistant', reply)        
         
         
     def close_app(self):

@@ -60,7 +60,7 @@
     margin: 0;
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 80px;
+    padding-bottom: 100px;
   
   
     /* TYPOGRAPHY */
@@ -100,6 +100,23 @@
     /* OTHER */
     word-wrap: break-word;
     user-select: text;
+    -webkit-user-select: text;
+}
+
+.message:hover {
+    background: linear-gradient(127deg, hsl(from var(--message-box) h s calc(l + 0.7)), hsl(from var(--message-box) h s calc(l + 5)));
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.bot {
+    /* DISPLAY & FLEXBOX/GRID */
+    align-self: flex-start;
+  
+  
+    /* BACKGROUND & BORDERS */
+    background-color: transparent;
+    border-top-left-radius: 2px;
 }
 
 .user {
@@ -109,7 +126,7 @@
   
     /* BACKGROUND & BORDERS */
     background-color: transparent;
-    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 #user-entry {
@@ -125,13 +142,31 @@
     justify-content: center;
 
   
+    background-color: hsla( from var(--message-box) h s calc(l - 2) / 75%); 
+    border: solid 1px var(--text-colors);
+    border-radius: 20px;
+    
     /* SIZING */
     min-height: 35px;
-    width: -webkit-fill-available ;
+    width: 80%;
   
   
     /* SPACING */
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    
+    /* EFFECTS */
+    transition: all 0.1s;
+}
+
+#user-entry:hover:not(:has(#form-submit:hover)){
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
+}
+
+#user-entry:has(#form-input:focus) {
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }
 
 #form-input {
@@ -142,12 +177,13 @@
     /* SIZING */
     min-height: 35px;
     max-height: 150px;
-    width: 80%;
+    width: -webkit-fill-available;
   
   
     /* SPACING */
     margin-right: 20px;
-    padding: 7.5px;
+    margin-left: 5px;
+    padding: 10px;
   
   
     /* TYPOGRAPHY */
@@ -155,9 +191,8 @@
     
     
     /* BACKGROUND & BORDERS */
-    background-color: hsla( from var(--message-box) h s calc(l - 2) / 75%); 
-    border: solid 1px var(--outline);
-    border-radius: 10px;
+    background: none;
+    border: none;
 
     /* OTHER */
     outline: none;
@@ -169,9 +204,20 @@
     /* SIZING */
     height: 35px;
     padding: 5px;
+    margin-bottom: 1px;
     
     /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 2) / 75%); 
-    border: solid 1px var(--outline);
-    border-radius: 10px;
+    border: solid 1px var(--text-colors);
+    border-radius: 15px;
+}
+
+#form-submit:hover {
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
+}
+
+#form-submit.send {
+    background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
+    outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }

@@ -29,7 +29,7 @@ const Settings = {
     defaults: {
         primaryColor: '#0C0F11',
         fontColor: '#adadad',
-        use_local: false,
+        use_local: true,
         model: 'deepseek-v3.1:671b-cloud',
         api_key: '000'
     },
@@ -77,6 +77,9 @@ const Settings = {
       case 'primaryColor':
         root.style.setProperty('--message-box', actualValue);
         break;
+      case 'use_local':
+        pywebview.api.use_local = actualValue;
+        break;
     }
   },
 
@@ -92,6 +95,26 @@ const Settings = {
     Object.keys(this.defaults).forEach(key => {
       this.apply(key, this.get(key));
     });
+  },
+
+  reset() {
+    this.current = this.defaults;
+    this.setValues();
+  },
+
+  setValues() {
+    const settings = SETTINGS.querySelectorAll('[data-settings');
+
+    settings.forEach(value => {
+
+        if (value.type == 'checkbox') {
+          console.log(value.checked);
+          value.checked = Settings.get(value.dataset.settings);
+          value.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        else value.value = Settings.get(value.dataset.settings);
+
+    });
   }
 };
 
@@ -99,12 +122,11 @@ function setSettings(){
     pywebview.api.model = Settings.get('model');
     pywebview.api.api_key = Settings.get('api_key');
     pywebview.api.use_local = Settings.get('use_local');
+    pywebview.api.system_message = Settings.get('system-message');
 
-    const settings = SETTINGS.querySelectorAll('[data-settings');
+    pywebview.api.setModel(Settings.get('model'), Settings.get('api_key'));
 
-    settings.forEach(value => {
-        value.value = Settings.get(value.dataset.settings);
-    });
+    Settings.setValues();
     
     document.getElementById('primary-color-picker').value = Settings.get('primaryColor');
 
@@ -116,13 +138,17 @@ function saveSettings(){
     const settings = SETTINGS.querySelectorAll('[data-settings');
 
     settings.forEach(value => {
-        Settings.set(value.dataset.settings, value.value);
+        
+        if (value.type == 'checkbox') {
+          console.log(value.checked);
+          Settings.set(value.dataset.settings, value.checked);
+        }
+        else Settings.set(value.dataset.settings, value.value); 
     });
 
     Settings.saveStorage();
 }
 
 function startClose(){
-    saveSettings();
     pywebview.api.close_app();
 }

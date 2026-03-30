@@ -5,15 +5,15 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>LLM Web UI</title>
       <link rel="stylesheet" href="src/css/variables.css">
-      <link rel="stylesheet" href="styling.css">
+      <link rel="stylesheet" href="src/css/styling.css">
   </head>
   
   <body>
     <header id="app-header">
         <button class="header-button" id="header-sidepanel-button">
-            <img class="icon sidebar">
+            <span class="icon sidebar"></span>
         </button>
-        <button class="header-button" id="header-exit-button" onclick="window.pywebview.api.close_app()">
+        <button class="header-button" id="header-exit-button" onclick="startClose()">
             <img class="icon exit">
         </button>
         <button class="header-button" id="header-settings-button">
@@ -29,7 +29,9 @@
             </div>
             <form id="user-entry">
                 <textarea id="form-input" type="text" placeholder="Type a message... (/ to focus)"></textarea>
-                <button id="form-submit"  type="submit">Send</button>
+                <button id="form-submit"  type="submit">
+                    <span class="icon submit"></span>
+                </button>
             </form>
         </div>
         <div id="settings">
@@ -70,11 +72,16 @@
                     
                         <div id="Advanced-panel" class="display">
                             <h2>Advanced Settings</h2>
+                            <form class="settings-selection">
+                                <div class="settings-label">System Message:</div>
+                                <textarea id="system-message" data-settings="system-message" placeholder="Enter your system message here"></textarea>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div id="settings-save-panel">
-                    
+                    <button id="save-changes" onclick="saveSettings()">save</button>
+                    <button id="reset-changes" onclick="Settings.reset()">reset</button>
                 </div>
             </div>
         </div>

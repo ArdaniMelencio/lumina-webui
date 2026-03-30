@@ -110,3 +110,30 @@
 #Advanced-panel {
     display: none;
 }
+
+#settings-save-panel {
+    display: flex ;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#settings-save-panel button {
+    background: none;
+    border: 1px solid var(--text-colors);
+    margin: 2px;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#settings-save-panel button:hover {
+    background: hsl( from var(--message-box) h s calc(l + 10));
+    margin: 2px;
+    border-radius: 20px;
+}
+
+#settings-save-panel button:active {
+    background: hsl( from var(--message-box) h s calc(l + 0));
+    margin: 2px;
+    border-radius: 20px;
+}

@@ -1,7 +1,7 @@
-@import url('src/css/icons.css');
-@import url('src/css/header.css');
-@import url('src/css/chat-container.css');
-@import url('src/css/settings.css');
+@import url('icons.css');
+@import url('header.css');
+@import url('chat-container.css');
+@import url('settings.css');
 
 html {
     overflow: hidden;
@@ -67,17 +67,17 @@ button {
     /* OTHER */
     cursor: pointer;
 }
-
+/*
 button:hover {
-    /* BACKGROUND & BORDERS */
+    /* BACKGROUND & BORDERS 
     background: hsl(from var(--main-color) h s calc(l + 2));
 }
 
 button:active {
-    /* BACKGROUND & BORDERS */
+    /* BACKGROUND & BORDERS 
     background-color: hsl(from var(--main-color) h s calc(l - 2));
 }
-
+*/
 main {
     /* DISPLAY & FLEXBOX/GRID */
     align-items: center;

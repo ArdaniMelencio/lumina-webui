@@ -1,0 +1,73 @@
+.icon {
+    /* DISPLAY & FLEXBOX/GRID */
+    display: inline-block;
+  
+  
+    /* SPACING */
+    padding: 10px;
+  
+  
+    /* BACKGROUND & BORDERS */
+    background: var(--text-colors);
+    
+    /* EFFECTS */
+    transition: all 0.05s;
+}
+
+.icon:hover {
+    padding: 12px;
+    background: hsl(from var(--text-colors) h s calc(l + 2));
+}
+
+.icon:active {
+
+    padding: 8px;
+    background: hsl(from var(--text-colors) h s calc(l - 3));
+
+}
+
+.icon.sidebar {
+    /* EFFECTS */
+    mask: url('../assets/icons/apps.svg') center no-repeat;
+    -webkit-mask: url('../assets/icons/apps.svg') center no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+.icon.exit {
+    /* EFFECTS */
+    mask: url('../assets/icons/exit.svg') center no-repeat;
+    -webkit-mask: url('../assets/icons/exit.svg') center no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+.icon.settings {
+    /* EFFECTS */
+    mask: url('../assets/icons/settings.svg') center no-repeat;
+    -webkit-mask: url('../assets/icons/settings.svg') center no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+.icon.submit {
+    /* LAYOUT & POSITIONING */
+    rotate: -45deg;
+  
+
+    /* SPACING */
+    margin-top: -2px;
+    margin-left: 4px;
+
+
+    /* EFFECTS */
+    mask: url('../assets/icons/paper-plane-top.svg') center no-repeat;
+    -webkit-mask: url('../assets/icons/paper-plane-top.svg') center no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+.icon.submit:hover {
+    /* EFFECTS */
+    padding: 10px;
+}
