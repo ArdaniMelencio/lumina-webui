@@ -1,7 +1,8 @@
 :root {  
     /* VARIABLES */
-    --main-color: rgb(32, 57, 61);
-    --message-box: rgb(10, 18, 19);
-    --outline: rgb(141, 141, 141);
-    --text-colors: rgb(173, 173, 173);
+    --message-box: #0a1213;
+    --outline: hsl(from var(--message-box) h s calc((l - 50) * -100%));
+    --text-colors: hsl(from var(--message-box) h s calc((l - 10) * -15%));
+
+    --main-color: hsl(from var(--message-box) h s calc(l + 3));
 }

@@ -34,7 +34,48 @@
         </div>
         <div id="settings">
             <div id="dim">
-                <div id="settings-panel"></div>
+                <div id="settings-panel">
+                    <div id="settings-sidepanel">
+                        <button class="settings-btn" data-panel="General" >General</button>
+                        <button class="settings-btn" data-panel="Themes" >Themes</button>
+                        <button class="settings-btn" data-panel="Advanced">Advanced</button>
+                    </div>
+                    <div id="settings-display">
+                        <div id="General-panel" class="display">
+                            <h2>General Settings</h2>
+                            <form class="settings-selection">
+                                <div class="settings-label">Model Name:</div>
+                                <input class="settings-input" id="model-name-input" data-settings="model"></input>
+                            </form>
+                            <form class="settings-selection">
+                                <div class="settings-label">Use Local</div>
+                                <label class="settings-input switch" >
+                                    <input id="checkbox-local" type="checkbox" data-settings="use_local">
+                                    <span class="slider"></span>
+                                </label>
+                            </form>
+                            <form class="settings-selection">
+                                <div class="settings-label">API code:</div>
+                                <input class="settings-input" id="api-key-input" data-settings="api_key"></input>
+                            </form>
+                        </div>
+                    
+                        <div id="Themes-panel" class="display">
+                            <h2>Themes Settings</h2>
+                            <form class="settings-selection">
+                                <div class="settings-label">Primary Color:</div>
+                                <input id="primary-color-picker" type="color" data-settings="primaryColor"> 
+                            </form>
+                        </div>
+                    
+                        <div id="Advanced-panel" class="display">
+                            <h2>Advanced Settings</h2>
+                        </div>
+                    </div>
+                </div>
+                <div id="settings-save-panel">
+                    
+                </div>
             </div>
         </div>
     </main>
