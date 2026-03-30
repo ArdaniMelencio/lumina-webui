@@ -67,7 +67,7 @@ def launch_webview(use_debug: bool = False):
     api._set_log_level(level=level)
     api._set_window(window=window)
     
-    webview.start(debug=use_debug, gui='gtk')
+    webview.start(debug=use_debug, gui='gtk', storage_path='./data', private_mode=False)
     
         
 if __name__ == "__main__":
