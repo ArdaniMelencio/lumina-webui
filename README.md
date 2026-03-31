@@ -13,6 +13,7 @@ A lightweight, customizable chat interface
     - OCR/visual tools (only available depending on model)
     - RAG functionality
     - Web searching
+    - Session storing
 
 ## 🚀 Installation
 
