@@ -88,9 +88,9 @@
   
   
     /* BACKGROUND & BORDERS */
-    border-radius: 15px;
-    border: 1px solid hsl(from var(--message-box) h s calc(l + 4));
     background: linear-gradient(127deg, hsl(from var(--message-box) h s calc(l + 0.2)), hsl(from var(--message-box) h s calc(l + 3)));
+    border: 1px solid hsl(from var(--message-box) h s calc(l + 4));
+    border-radius: 15px;
     
   
     /* EFFECTS */
@@ -104,9 +104,10 @@
 }
 
 .message:hover {
+    /* BACKGROUND & BORDERS */
     background: linear-gradient(127deg, hsl(from var(--message-box) h s calc(l + 0.7)), hsl(from var(--message-box) h s calc(l + 5)));
-    border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .bot {
@@ -142,6 +143,7 @@
     justify-content: center;
 
   
+    /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 2) / 75%); 
     border: solid 1px var(--text-colors);
     border-radius: 20px;
@@ -160,11 +162,13 @@
 }
 
 #user-entry:hover:not(:has(#form-submit:hover)){
+    /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
     outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }
 
 #user-entry:has(#form-input:focus) {
+    /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
     outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }
@@ -213,11 +217,13 @@
 }
 
 #form-submit:hover {
+    /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
     outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }
 
 #form-submit.send {
+    /* BACKGROUND & BORDERS */
     background-color: hsla( from var(--message-box) h s calc(l - 5) / 75%); 
     outline: solid 1px hsla( from var(--text-colors) h s l / 25%);
 }

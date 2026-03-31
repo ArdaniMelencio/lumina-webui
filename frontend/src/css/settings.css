@@ -1,139 +1,215 @@
 @import url('./elements.css');
 
 #settings {
+    /* LAYOUT & POSITIONING */
     position: absolute;
     top: 35px;
+
+
+    /* DISPLAY & FLEXBOX/GRID */
+    display: none;
+
+
+    /* BACKGROUND & BORDERS */
     height: 100vh;
     width: 100vw;
-    display: none;
 }
 
 #settings.toggle {
+    /* DISPLAY & FLEXBOX/GRID */
     display: block;
 }
 
 #dim {
+    /* LAYOUT & POSITIONING */
     position: absolute;
-    height: calc(100% - 35px);
-    width: 100%;
-    
-    background-color: rgba(0, 0, 0, 0.27);
-    
+
+
+    /* DISPLAY & FLEXBOX/GRID */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column ;
-    
+
+
+    /* SIZING */
+    height: calc(100% - 35px);
+    width: 100%;
+
+
+    /* BACKGROUND & BORDERS */
+    background-color: rgba(0, 0, 0, 0.27);    
 }
 
 #settings-panel {
-    height: calc(80% - 30px);
-    width: 80%;
-    background-color: hsl( from var(--message-box) h s calc(l + 3));
+    /* DISPLAY & FLEXBOX/GRID */
     display: flex;
+
+
+    /* SIZING */
+    width: 80%;
+    height: calc(80% - 30px);
+
+    
+    /* BACKGROUND & BORDERS */
+    background-color: hsl( from var(--message-box) h s calc(l + 3));
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px; 
 }
 
 #settings-save-panel {
+    /* SIZING */
     height: 30px;
     width: 80%;
+
+
+    /* BACKGROUND & BORDERS */
     background-color: hsl( from var(--message-box) h s calc(l + 3));
     border-top: solid 1px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    
 }
 
 #settings-sidepanel {
+    /* DISPLAY & FLEXBOX/GRID */
+    display: flex ;
+    flex-direction: column ;
+
+
+    /* SIZING */
+    height: 100%;
     width: 100px;
+
+
+    /* SPACING */
+    padding-top: 8px;
+
+
+    /* BACKGROUND & BORDERS */
     border-right: solid 1px rgba(73, 82, 92, 0.34);
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    height: 100%;
-    display: flex ;
-    flex-direction: column ;
-    padding-top: 8px;
-    
 }
 
 .settings-btn {
-    background: transparent;
-    border-radius: 0px;
+    /* SPACING */
     margin-top: 2px;
     margin-bottom: 2px;
+
+
+    /* BACKGROUND & BORDERS */
+    background: transparent;
+    border-radius: 0px;
 }
 
 #settings-display {
+    /* SIZING */
+    width: -webkit-fill-available;
+
+    
+    /* SPACING */
     margin-left: 10px;
     margin-right: 10px;
-    width: -webkit-fill-available;
 }
 
 #settings-display input {
+    /* BACKGROUND & BORDERS */
     background: hsl( from var(--message-box) h s calc(l + 8));
 }
 
 .settings-selection {
-    width: 100%;
-    height: 20px;
+    /* DISPLAY & FLEXBOX/GRID */
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+
+    /* SIZING */
+    height: 20px;
+    width: 100%;
+
+
+    /* SPACING */
     padding-top: 5px;
     padding-bottom: 7px;
-    border-top: 1px solid;
+
+
+    /* BACKGROUND & BORDERS */
     border-radius: 0px;
+    border-top: 1px solid;
 }
 
 .settings-label {
+    /* DISPLAY & FLEXBOX/GRID */
     justify-self: start;
 }
 
 .settings-input {
-    width: 100%;
+    /* DISPLAY & FLEXBOX/GRID */
     justify-self: end;
+
+
+    /* SIZING */
+    width: 100%;
+
+
+    /* BACKGROUND & BORDERS */
     border: none;
 }
 
 .settings-input:focus {
+    /* BACKGROUND & BORDERS */
     outline: none;
 }
 
 #General-panel {
+    /* DISPLAY & FLEXBOX/GRID */
     display: block;
 }
 
 #Themes-panel {
+    /* DISPLAY & FLEXBOX/GRID */
     display: none;
 }
 
 #Advanced-panel {
+    /* DISPLAY & FLEXBOX/GRID */
     display: none;
 }
 
 #settings-save-panel {
+    /* DISPLAY & FLEXBOX/GRID */
     display: flex ;
     flex-direction: row;
     justify-content: end;
 }
 
 #settings-save-panel button {
-    background: none;
-    border: 1px solid var(--text-colors);
-    margin: 2px;
-    border-radius: 20px;
+    /* SPACING */
     padding-left: 5px;
     padding-right: 5px;
+    margin: 2px;
+
+
+    /* BACKGROUND & BORDERS */
+    background: none;
+    border: 1px solid var(--text-colors);
+    border-radius: 20px;
 }
 
 #settings-save-panel button:hover {
-    background: hsl( from var(--message-box) h s calc(l + 10));
+    /* SPACING */
     margin: 2px;
+
+    
+    /* BACKGROUND & BORDERS */
+    background: hsl( from var(--message-box) h s calc(l + 10));
     border-radius: 20px;
 }
 
 #settings-save-panel button:active {
-    background: hsl( from var(--message-box) h s calc(l + 0));
+    /* SPACING */
     margin: 2px;
+    /* BACKGROUND & BORDERS */
+    background: hsl( from var(--message-box) h s calc(l + 0));
     border-radius: 20px;
 }

@@ -10,20 +10,27 @@
     /* BACKGROUND & BORDERS */
     background: var(--text-colors);
     
+    
     /* EFFECTS */
     transition: all 0.05s;
 }
 
 .icon:hover {
+    /* SPACING */
     padding: 12px;
+
+
+    /* BACKGROUND & BORDERS */
     background: hsl(from var(--text-colors) h s calc(l + 2));
 }
 
 .icon:active {
-
+    /* SPACING */
     padding: 11px;
-    background: hsl(from var(--text-colors) h s calc(l - 3));
 
+
+    /* BACKGROUND & BORDERS */
+    background: hsl(from var(--text-colors) h s calc(l - 3));
 }
 
 .icon.sidebar {
