@@ -1,22 +1,20 @@
-// Prepares everything when DOM is ready
-document.addEventListener('DOMContentLoaded', async function(e) {
 
-    
-})
 
 window.addEventListener('pywebviewready', async function(e) {
-    
+    // Initialize event listeners on startup
     __init_events();
-    Settings.init();
-    setSettings();
-    
 });
 
 function handleUserInput(message) {
-
+    // Handle 
     INPUT_BTN.classList.add('send');
 
-    if (INPUT_TEXT.value == '') { setTimeout(() => { INPUT_BTN.classList.remove('send'); }, 100); return; }
+    if (INPUT_TEXT.value == '') { 
+        setTimeout(() => { 
+            INPUT_BTN.classList.remove('send'); }, 
+            100); 
+        return; 
+    }
 
     if (!CHATBOX.classList.contains('hasMessage')) {
         CHATBOX.classList.add('hasMessage');
