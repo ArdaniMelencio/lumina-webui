@@ -3,6 +3,11 @@ function __init_events(e){
     resize_input();
     pywebview.api.log("Input textarea initialized", 10);
 
+    // Initialize settings on function call
+    Settings.init();
+    setSettings();
+    pywebview.api.log("Settings initialized", 10);
+
     // Auto-resize textarea as user types
     INPUT_TEXT.addEventListener('input', async function(event) {
         event.preventDefault();
